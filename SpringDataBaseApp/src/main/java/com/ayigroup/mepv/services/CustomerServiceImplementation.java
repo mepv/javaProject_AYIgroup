@@ -5,7 +5,6 @@ import com.ayigroup.mepv.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +16,7 @@ public class CustomerServiceImplementation implements CustomerService {
 
     @Override
     public List<Customer> getCustomers() {
-        List<Customer> customers = new ArrayList<>();
-        for (Customer customer :
-                customerRepository.findAll()) {
-            customers.add(customer);
-        }
-        return customers;
+        return customerRepository.findAll();
     }
 
     @Override
