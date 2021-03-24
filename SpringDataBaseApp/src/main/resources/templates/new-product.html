@@ -34,6 +34,7 @@
                 <th>Producto</th>
                 <th>Precio</th>
                 <th>Condición</th>
+                <th>Opciones</th>
             </tr>
             </thead>
             <tbody>
@@ -41,6 +42,10 @@
                 <td th:text="${product.productName}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.condition}"></td>
+                <td><a th:href="@{/showFormForUpdateProduct/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Modificar</a>
+                    <a th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-danger btn-sm">Borrar</a>
+                </td>
+
             </tr>
             </tbody>
         </table>
