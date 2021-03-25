@@ -1,18 +1,20 @@
 package com.ayigroup.mepv.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 @SequenceGenerator(name = "CUSTOMER_SEQ")
 public class Customer {
 
@@ -30,11 +32,12 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
-    @JoinTable(name = "product_customer",
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name = "customer_product",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    private Set<Product> products;
 
     public Customer(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -44,7 +47,7 @@ public class Customer {
 
     public void addProducts(Product product) {
         if (products == null) {
-            products = new ArrayList<>();
+            products = new HashSet<>();
         }
         products.add(product);
     }

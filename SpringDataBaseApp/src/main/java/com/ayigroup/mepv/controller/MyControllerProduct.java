@@ -38,6 +38,13 @@ public class MyControllerProduct {
         return "redirect:/";
     }
 
+    @GetMapping("/showFormForUpdateProduct/{id}")
+    public String showFormForUpdateProduct(@PathVariable(value = "id") long id, Model model) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        return "update-product";
+    }
+
     @GetMapping("/deleteProduct/{id}")
     private String deleteProduct(@PathVariable (value = "id") long id) {
         this.productService.deleteProductById(id);
