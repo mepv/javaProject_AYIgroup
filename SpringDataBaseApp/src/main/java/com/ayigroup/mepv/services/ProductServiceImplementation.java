@@ -15,17 +15,39 @@ public class ProductServiceImplementation implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    /**
+     * Save a Product to the database.
+     *
+     * @param product the product object.
+     */
     @Override
     public void saveProduct(Product product) {
         this.productRepository.save(product);
     }
 
+    /**
+     * Overload method to be implemented by the RestController class.
+     * Save a Product to the database.
+     *
+     * @param productName the product name.
+     * @param condition the condition.
+     * @param price the price of the product.
+     */
     @Override
     public void saveProduct(String productName, String condition, BigDecimal price) {
         Product tempProduct = new Product(productName, condition, price);
         saveProduct(tempProduct);
     }
 
+    /**
+     * Retrieve a specific product from the database.
+     *
+     * @param id the id of the product.
+     *
+     * @throws RuntimeException in case it was not found.
+     *
+     * @return the product object.
+     */
     @Override
     public Product getProductById(long id) {
         Optional<Product> optional = productRepository.findById(id);
@@ -38,11 +60,21 @@ public class ProductServiceImplementation implements ProductService {
         return product;
     }
 
+    /**
+     * Delete a Product from the database.
+     *
+     * @param id the id of the product.
+     */
     @Override
     public void deleteProductById(long id) {
         this.productRepository.deleteById(id);
     }
 
+    /**
+     * Display all the Products from the database.
+     *
+     * @return a {@link java.util.List List<>} of products.
+     */
     @Override
     public List<Product> getProducts() {
         return this.productRepository.findAll();
