@@ -36,6 +36,12 @@ public class Customer {
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
+    public Customer(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public void addProducts(Product product) {
         if (products == null) {
             products = new ArrayList<>();

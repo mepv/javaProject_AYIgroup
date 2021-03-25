@@ -5,6 +5,7 @@ import com.ayigroup.mepv.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,12 @@ public class ProductServiceImplementation implements ProductService {
     @Override
     public void saveProduct(Product product) {
         this.productRepository.save(product);
+    }
+
+    @Override
+    public void saveProduct(String productName, String condition, BigDecimal price) {
+        Product tempProduct = new Product(productName, condition, price);
+        saveProduct(tempProduct);
     }
 
     @Override
