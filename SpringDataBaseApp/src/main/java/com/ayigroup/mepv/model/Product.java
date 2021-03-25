@@ -31,11 +31,14 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "customer_id")
-    private long customerId;
-
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Customer> customers;
+
+    public Product(String productName, String condition, BigDecimal price) {
+        this.productName = productName;
+        this.condition = condition;
+        this.price = price;
+    }
 
     public void addCustomer(Customer customer) {
         if (customers == null) {

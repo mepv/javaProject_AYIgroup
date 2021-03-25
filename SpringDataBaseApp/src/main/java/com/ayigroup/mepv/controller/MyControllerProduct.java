@@ -13,45 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class MyController {
+public class MyControllerProduct {
 
     @Autowired
     private CustomerService customerService;
 
     @Autowired
     private ProductService productService;
-
-    @GetMapping("/")
-    public String homePage(Model model) {
-        model.addAttribute("listCustomer", customerService.getCustomers());
-        return "index";
-    }
-
-    @GetMapping("/newCustomer")
-    public String newCustomer(Model model) {
-        Customer customer = new Customer();
-        model.addAttribute("customer", customer);
-        return "new-customer";
-    }
-
-    @PostMapping("/saveCustomer")
-    public String saveCustomer(@ModelAttribute("customer") Customer customer) {
-        customerService.saveCustomer(customer);
-        return "redirect:/";
-    }
-
-    @GetMapping("/showFormForUpdate/{id}")
-    public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
-        Customer customer = customerService.getCustomerById(id);
-        model.addAttribute("customer", customer);
-        return "update-customer";
-    }
-
-    @GetMapping("/deleteCustomer/{id}")
-    public String deleteCustomer(@PathVariable (value = "id") long id) {
-        this.customerService.deleteCustomerById(id);
-        return "redirect:/";
-    }
 
     @GetMapping("/newProduct/{id}")
     public String newProduct(@PathVariable(value = "id") long id, Model model) {
@@ -68,13 +36,6 @@ public class MyController {
     public String saveProduct(@ModelAttribute("product") Product product) {
         productService.saveProduct(product);
         return "redirect:/";
-    }
-
-    @GetMapping("/showFormForUpdateProduct/{id}")
-    public String showFormForUpdateProduct(@PathVariable(value = "id") long id, Model model) {
-        Product product = productService.getProductById(id);
-        model.addAttribute("product", product);
-        return "update-product";
     }
 
     @GetMapping("/deleteProduct/{id}")

@@ -25,6 +25,12 @@ public class CustomerServiceImplementation implements CustomerService {
     }
 
     @Override
+    public void saveCustomer(String firstName, String lastName, String email) {
+        Customer tempCustomer = new Customer(firstName, lastName, email);
+        saveCustomer(tempCustomer);
+    }
+
+    @Override
     public Customer getCustomerById(long id) {
         Optional<Customer> optional = customerRepository.findById(id);
         Customer customer;
