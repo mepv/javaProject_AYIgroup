@@ -14,10 +14,11 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(name = "PRODUCT_SEQ")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCT_SEQ")
     @Column(name = "id")
     private long id;
 
