@@ -13,10 +13,11 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(name = "CUSTOMER_SEQ")
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMER_SEQ")
     @Column(name = "id")
     private long id;
 
