@@ -2,6 +2,7 @@ package com.ayigroup.mepv.security.auth;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,12 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Set;
 
 @Entity
 @Table(name = "app_user")
 @Getter
 @Setter
+@NoArgsConstructor
 @EqualsAndHashCode
 @SequenceGenerator(name = "APP_USER_SEQ")
 public class AppUser implements UserDetails {
@@ -46,7 +48,12 @@ public class AppUser implements UserDetails {
     @Column(name = "role")
     private AppUserRole appUserRole;
 
-    public AppUser() {
+    @Column(name = "permission")
+    @ElementCollection(targetClass = SimpleGrantedAuthority.class, fetch = FetchType.EAGER)
+    private Set<? extends GrantedAuthority> grantedAuthorities;
+
+    public AppUser(Set<? extends GrantedAuthority> grantedAuthorities) {
+        this.grantedAuthorities = grantedAuthorities;
         this.accountNonExpired = isAccountNonExpired();
         this.accountNonLocked = isAccountNonLocked();
         this.credentialsNonExpired = isCredentialsNonExpired();
@@ -55,8 +62,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
-        return Collections.singletonList(authority);
+        return grantedAuthorities;
     }
 
     @Override

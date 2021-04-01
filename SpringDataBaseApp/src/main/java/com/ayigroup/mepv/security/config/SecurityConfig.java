@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import static com.ayigroup.mepv.security.auth.AppUserRole.ADMIN;
+
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 
     @Override
@@ -32,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/about", "/signup/**").permitAll()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/api/**").hasRole("IMPLEMENTAR - > enum y demás")
+                    .antMatchers("/admin/**").hasRole(ADMIN.name())
+                    .antMatchers("/api/**").hasRole(ADMIN.name())
                     .antMatchers("/login*")
                     .permitAll()
                 .anyRequest()
@@ -58,7 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(appUserService);
