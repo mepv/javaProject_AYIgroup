@@ -22,7 +22,6 @@ public class RegistrationController {
 
     @PostMapping("/signup/saveUser")
     public String saveUser(@ModelAttribute("user") RegistrationRequest request) {
-        System.out.println("controller implemented");
         appUserService.signUpUser(request);
         return "redirect:/login";
     }
