@@ -1,6 +1,7 @@
 package com.ayigroup.mepv.services;
 
 import com.ayigroup.mepv.model.Customer;
+import com.ayigroup.mepv.model.Product;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CustomerService {
     Customer getCustomerById(long id);
 
     void deleteCustomerById(long id);
+
+    Product assignProducts(long id);
 }

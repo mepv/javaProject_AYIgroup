@@ -16,6 +16,7 @@
     <h2>Guardar producto</h2>
 
     <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{tempIdCustomer}"/>
         <input type="text" th:field="*{productName}"
                placeholder="Producto" class="form-control mb-4 col-4">
 

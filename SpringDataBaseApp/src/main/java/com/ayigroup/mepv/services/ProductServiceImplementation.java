@@ -1,5 +1,6 @@
 package com.ayigroup.mepv.services;
 
+import com.ayigroup.mepv.model.Customer;
 import com.ayigroup.mepv.model.Product;
 import com.ayigroup.mepv.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,16 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductServiceImplementation implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CustomerService customerService;
 
     /**
      * Save a Product to the database.
@@ -76,7 +81,18 @@ public class ProductServiceImplementation implements ProductService {
      * @return a {@link java.util.List List<>} of products.
      */
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getAllProducts() {
         return this.productRepository.findAll();
+    }
+
+    /**
+     * Display all the Products associated with a specific customer.
+     * @param id the customer id to filter the products associated to its.
+     * @return a Set of Product.
+     */
+    @Override
+    public Set<Product> findAllProductsByCustomerId(long id) {
+        Customer tempCustomer = customerService.getCustomerById(id);
+        return tempCustomer.getProducts();
     }
 }

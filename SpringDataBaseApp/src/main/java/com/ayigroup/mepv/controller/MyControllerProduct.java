@@ -23,17 +23,15 @@ public class MyControllerProduct {
 
     @GetMapping("/newProduct/{id}")
     public String newProduct(@PathVariable(value = "id") long id, Model model) {
-        Product product = new Product();
-        Customer tempCustomer = customerService.getCustomerById(id);
-        tempCustomer.addProducts(product);
-        product.addCustomer(tempCustomer);
-        model.addAttribute("product", product);
-        model.addAttribute("listProducts", productService.getProducts());
+        model.addAttribute("product", customerService.assignProducts(id));
+        model.addAttribute("listProducts", productService.findAllProductsByCustomerId(id));
         return "new-product";
     }
 
     @PostMapping("/saveProduct")
     public String saveProduct(@ModelAttribute("product") Product product) {
+        Customer tempCustomer = customerService.getCustomerById(product.getTempIdCustomer());
+        product.addCustomer(tempCustomer);
         productService.saveProduct(product);
         return "redirect:/";
     }
@@ -46,7 +44,7 @@ public class MyControllerProduct {
     }
 
     @GetMapping("/deleteProduct/{id}")
-    private String deleteProduct(@PathVariable (value = "id") long id) {
+    public String deleteProduct(@PathVariable (value = "id") long id) {
         this.productService.deleteProductById(id);
         return "redirect:/";
     }
