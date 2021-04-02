@@ -1,6 +1,7 @@
 package com.ayigroup.mepv.services;
 
 import com.ayigroup.mepv.model.Customer;
+import com.ayigroup.mepv.model.Product;
 import com.ayigroup.mepv.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class CustomerServiceImplementation implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private CustomerService customerService;
 
     /**
      * Display all the Customers from the database.
@@ -77,5 +81,19 @@ public class CustomerServiceImplementation implements CustomerService {
     @Override
     public void deleteCustomerById(long id) {
         this.customerRepository.deleteById(id);
+    }
+
+    /**
+     * Assigns a set of products to a specific customer.
+     * @param id the id of the customer that have this products.
+     * @return a Product object to be pass to the model new-product.
+     */
+    @Override
+    public Product assignProducts(long id) {
+        Product product = new Product();
+        product.setTempIdCustomer(id);
+        Customer tempCustomer = customerService.getCustomerById(id);
+        tempCustomer.addProducts(product);
+        return product;
     }
 }

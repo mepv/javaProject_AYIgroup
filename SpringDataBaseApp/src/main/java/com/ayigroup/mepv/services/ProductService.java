@@ -4,6 +4,7 @@ import com.ayigroup.mepv.model.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public interface ProductService {
 
@@ -15,5 +16,7 @@ public interface ProductService {
 
     void deleteProductById(long id);
 
-    List<Product> getProducts();
+    List<Product> getAllProducts();
+
+    Set<Product> findAllProductsByCustomerId(long id);
 }

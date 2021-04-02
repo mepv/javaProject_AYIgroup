@@ -22,7 +22,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCT_SEQ")
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "product_name")
     private String productName;
@@ -32,6 +32,9 @@ public class Product {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @Column(name = "customer_id")
+    private Long tempIdCustomer;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
