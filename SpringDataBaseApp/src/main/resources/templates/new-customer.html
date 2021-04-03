@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Clientes Base de Datos</title>
@@ -10,28 +10,32 @@
 
 </head>
 <body>
-<div class="container">
-    <h1>Manejo Base de Datos - Clientes</h1>
-    <hr>
-    <h2>Guardar cliente</h2>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0F44C7;">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <a class="nav-link active" style="color: #fff;" th:href="@{/}">Home</a>
+                <a class="nav-item nav-link active" style="color: #fff;" th:href="@{/about}">Acerca del Proyecto</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Manejo Base de Datos - Clientes</h2>
+        <br>
+        <h3>Guardar cliente</h3>
+        <form action="#" th:action="@{/saveCustomer}" th:object="${customer}" method="post">
+            <input type="text" th:field="*{firstName}"
+                   placeholder="Nombre Cliente" class="form-control mb-4 col-4">
 
-    <form action="#" th:action="@{/saveCustomer}" th:object="${customer}" method="post">
-        <input type="text" th:field="*{firstName}"
-               placeholder="Nombre Cliente" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{lastName}"
+                   placeholder="Apellido Cliente" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{lastName}"
-               placeholder="Apellido Cliente" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{email}"
+                   placeholder="email" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{email}"
-               placeholder="email" class="form-control mb-4 col-4">
-
-        <button type="submit" class="btn btn-success col-2"> Guardar Cliente</button>
-
-        <hr>
-
-        <a th:href="@{/}" class="btn btn-info">Lista de Clientes</a>
-
-    </form>
-</div>
+            <button type="submit" class="btn btn-success col-2"> Guardar Cliente</button>
+            <hr>
+            <a th:href="@{/}" class="btn btn-info">Lista de Clientes</a>
+        </form>
+    </div>
 </body>
 </html>
