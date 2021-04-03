@@ -14,6 +14,16 @@ public class RegistrationController {
     @Autowired
     private AppUserService appUserService;
 
+    @GetMapping("/login")
+    public String showLogin() {
+        return "login";
+    }
+
+    @GetMapping("/about")
+    public String showAbout() {
+        return "about";
+    }
+
     @GetMapping("/signup")
     public String registrationPage(Model model) {
         model.addAttribute("user", new RegistrationRequest());

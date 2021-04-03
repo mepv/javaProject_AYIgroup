@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,13 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/about", "/signup/**").permitAll()
                     .antMatchers("/admin/**").hasRole(ADMIN.name())
                     .antMatchers("/api/**").hasRole(ADMIN.name())
-                    .antMatchers("/login*")
-                    .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-//                    .loginPage("/login")
+                    .loginPage("/login")
                     .permitAll()
                     .defaultSuccessUrl("/", true)
                     .passwordParameter("password")
@@ -56,6 +55,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID")
                     .logoutSuccessUrl("/login")
                 .permitAll();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**");
     }
 
     @Bean

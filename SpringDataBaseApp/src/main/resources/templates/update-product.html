@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Clientes Base de Datos</title>
@@ -9,27 +9,35 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <h2>Productos</h2>
-    <hr>
-    <h4>Actualizar Productos</h4>
-
-    <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="post">
-        <input type="text" th:field="*{productName}" class="form-control mb-4 col-4">
-
-        <input type="hidden" th:field="*{id}">
-
-        <input type="text" th:field="*{price}" class="form-control mb-4 col-4">
-
-        <input type="text" th:field="*{condition}" class="form-control mb-4 col-4">
-
-        <button type="submit" class="btn btn-info col-2">Actualizar Producto</button>
-
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0F44C7;">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <a class="nav-link active" style="color: #fff;" th:href="@{/}">Home</a>
+                <a class="nav-item nav-link active" style="color: #fff;" th:href="@{/about}">Acerca del Proyecto</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Productos</h2>
         <hr>
+        <h4>Actualizar Productos</h4>
 
-        <a th:href="@{/}" class="btn btn-primary">Regresar a la Lista</a>
+        <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="post">
+            <input type="text" th:field="*{productName}" class="form-control mb-4 col-4">
 
-    </form>
-</div>
+            <input type="hidden" th:field="*{id}">
+
+            <input type="text" th:field="*{price}" class="form-control mb-4 col-4">
+
+            <input type="text" th:field="*{condition}" class="form-control mb-4 col-4">
+
+            <button type="submit" class="btn btn-info col-2">Actualizar Producto</button>
+
+            <hr>
+
+            <a th:href="@{/}" class="btn btn-primary">Regresar a la Lista</a>
+
+        </form>
+    </div>
 </body>
 </html>

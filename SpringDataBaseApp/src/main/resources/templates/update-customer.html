@@ -9,28 +9,36 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <h1>Clientes</h1>
-    <hr>
-    <h2>Actualizar Clientes</h2>
-
-    <form action="#" th:action="@{/saveCustomer}" th:object="${customer}" method="post">
-        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
-
-        <!-- add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}">
-
-        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
-
-        <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
-
-        <button type="submit" class="btn btn-info col-2">Actualizar Cliente</button>
-
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0F44C7;">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <a class="nav-link active" style="color: #fff;" th:href="@{/}">Home</a>
+                <a class="nav-item nav-link active" style="color: #fff;" th:href="@{/about}">Acerca del Proyecto</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Clientes</h1>
         <hr>
+        <h2>Actualizar Clientes</h2>
 
-        <a th:href="@{/}" class="btn btn-primary">Regresar a la Lista</a>
+        <form action="#" th:action="@{/saveCustomer}" th:object="${customer}" method="post">
+            <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
 
-    </form>
-</div>
+            <!-- add hidden form field to handle update -->
+            <input type="hidden" th:field="*{id}">
+
+            <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
+
+            <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+
+            <button type="submit" class="btn btn-info col-2">Actualizar Cliente</button>
+
+            <hr>
+
+            <a th:href="@{/}" class="btn btn-primary">Regresar a la Lista</a>
+
+        </form>
+    </div>
 </body>
 </html>
