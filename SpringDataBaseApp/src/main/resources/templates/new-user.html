@@ -21,14 +21,21 @@
     <div class="container">
         <h1>Manejo Base de Datos - Clientes</h1>
         <hr>
-        <h2>Registrar Nuevo Usuario</h2>
+        <h4>Registrar Nuevo Usuario</h4>
 
         <form action="#" th:action="@{/signup/saveUser}" th:object="${user}" method="post">
-            <input type="text" th:field="*{requestUser}"
-                   placeholder="Usuario" class="form-control mb-4 col-4">
-
-            <input type="password" th:field="*{password}"
-                   placeholder="Password" class="form-control mb-4 col-4">
+            <div>
+                <input type="text" th:field="*{requestUser}"
+                       placeholder="Usuario" class="form-control mb-2 col-2">
+                <small th:if="${#fields.hasErrors('requestUser')}" th:erros="*{requestUser}"
+                       style="color: red; font-style: italic;">*campo requerido - mínimo 3 caracteres</small>
+            </div>
+            <div>
+                <input type="password" th:field="*{password}"
+                       placeholder="Password" class="form-control mb-2 col-2">
+                <small th:if="${#fields.hasErrors('password')}" th:erros="*{password}"
+                      style="color: red; font-style: italic;">*campo requerido - mínimo 3 caracteres</small>
+            </div>
 
             <button type="submit" class="btn btn-success col-2">Registrar</button>
 
