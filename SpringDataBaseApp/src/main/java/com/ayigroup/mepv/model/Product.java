@@ -43,10 +43,11 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "customer_id"))
     private Set<Customer> customers;
 
-    public Product(String productName, String condition, BigDecimal price) {
+    public Product(String productName, String condition, BigDecimal price, long tempIdCustomer) {
         this.productName = productName;
         this.condition = condition;
         this.price = price;
+        this.tempIdCustomer = tempIdCustomer;
     }
 
     public void addCustomer(Customer customer) {

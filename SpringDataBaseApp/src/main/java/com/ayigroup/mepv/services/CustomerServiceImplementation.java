@@ -18,6 +18,13 @@ public class CustomerServiceImplementation implements CustomerService {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ProductService productService;
+
+    public CustomerServiceImplementation(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     /**
      * Display all the Customers from the database.
      *

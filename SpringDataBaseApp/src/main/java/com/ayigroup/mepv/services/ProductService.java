@@ -10,7 +10,7 @@ public interface ProductService {
 
     void saveProduct(Product product);
 
-    void saveProduct(String productName, String condition, BigDecimal price);
+    void saveProduct(String productName, String condition, BigDecimal price, long id);
 
     Product getProductById(long id);
 

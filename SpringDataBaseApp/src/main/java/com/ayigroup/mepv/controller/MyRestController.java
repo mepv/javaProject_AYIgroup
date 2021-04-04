@@ -25,10 +25,12 @@ public class MyRestController {
     public String newProducts(@RequestParam(name = "product", defaultValue = "producto sin nombre") String productName,
                               @RequestParam(name = "condition", defaultValue = "sin definir") String condition,
                               @RequestParam(name = "price", defaultValue = "0") BigDecimal price,
+                              @RequestParam(name = "customerId", defaultValue = "1") long id,
                               @RequestBody InitElementProduct initElementProduct) {
         productService.saveProduct(initElementProduct.getProductName(),
                 initElementProduct.getCondition(),
-                initElementProduct.getPrice());
+                initElementProduct.getPrice(),
+                initElementProduct.getTempIdCustomer());
         return "";
     }
 

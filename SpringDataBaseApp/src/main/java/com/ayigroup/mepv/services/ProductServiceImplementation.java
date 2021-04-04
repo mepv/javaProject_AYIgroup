@@ -39,8 +39,8 @@ public class ProductServiceImplementation implements ProductService {
      * @param price the price of the product.
      */
     @Override
-    public void saveProduct(String productName, String condition, BigDecimal price) {
-        Product tempProduct = new Product(productName, condition, price);
+    public void saveProduct(String productName, String condition, BigDecimal price, long id) {
+        Product tempProduct = new Product(productName, condition, price, id);
         saveProduct(tempProduct);
     }
 

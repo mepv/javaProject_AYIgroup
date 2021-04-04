@@ -1,0 +1,21 @@
+Customer:
+  - id: 1
+    firstName: "Krishnah"
+    lastName: "Buckwell"
+    email: "kbuckwell0@chicagotribune.com"
+  - id: 2
+    firstName: "Holden"
+    lastName: "Biaggi"
+    email: "hdibiaggi1@newsvine.com"
+  - id: 3
+    firstName: "Penn"
+    lastName: "Janca"
+    email: "pjanca2@prlog.org"
+  - id: 4
+    firstName: "Leanora"
+    lastName: "Riddel"
+    email: "lriddel3@webmd.com"
+  - id: 5
+    firstName: "Dame"
+    lastName: "Miliffe"
+    email: "dmiliffe5@joomla.org"

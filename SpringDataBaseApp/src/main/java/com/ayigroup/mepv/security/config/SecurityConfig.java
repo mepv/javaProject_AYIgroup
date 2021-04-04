@@ -2,17 +2,16 @@ package com.ayigroup.mepv.security.config;
 
 import com.ayigroup.mepv.security.auth.AppUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import static com.ayigroup.mepv.security.auth.AppUserRole.ADMIN;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,38 +29,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .headers().frameOptions().disable()
-                .and()
-                .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/about", "/signup/**").permitAll()
-                    .antMatchers("/admin/**").hasRole(ADMIN.name())
-                    .antMatchers("/api/**").hasRole(ADMIN.name())
-                .anyRequest()
-                .authenticated()
+                    .requestMatchers(PathRequest
+                            .toStaticResources()
+                            .atCommonLocations()).permitAll()
+                .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .defaultSuccessUrl("/", true)
-                    .passwordParameter("password")
-                    .usernameParameter("username")
-                    .failureUrl("/login.html?error=true")
+                    .loginPage("/login").permitAll()
                 .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .clearAuthentication(true)
-                    .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/login")
-                .permitAll();
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/**", "/static/**");
+                .and()
+                .httpBasic()
+                .and()
+                .headers().frameOptions().disable()
+                .and()
+                .csrf().disable();
     }
 
     @Bean
