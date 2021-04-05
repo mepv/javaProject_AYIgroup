@@ -1,5 +1,6 @@
 package com.ayigroup.mepv.security.auth;
 
+import com.ayigroup.mepv.exceptions.UserNameNotAvailableException;
 import com.ayigroup.mepv.security.resgistration.RegistrationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -37,11 +38,16 @@ public class AppUserService implements UserDetailsService {
                 .isPresent();
 
         if (userExits) {
-            throw new IllegalStateException("usuario no disponible");
+            throw new UserNameNotAvailableException("Usuario no Disponible :(");
         }
         return appUserRepository.save(appUser);
     }
 
+    /**
+     * The function of this method is to create a default user with the intention
+     * of facilitate the interaction with the app. This is not recommended for production purposes.
+     * @return an AppUser.
+     */
     @Bean
     private AppUser adminRegister() {
         AppUser admin = new AppUser(ADMIN.getGrantedAuthorities());

@@ -1,5 +1,6 @@
 package com.ayigroup.mepv.services;
 
+import com.ayigroup.mepv.exceptions.IdNotFoundException;
 import com.ayigroup.mepv.model.Customer;
 import com.ayigroup.mepv.model.Product;
 import com.ayigroup.mepv.repositories.ProductRepository;
@@ -22,11 +23,12 @@ public class ProductServiceImplementation implements ProductService {
 
     /**
      * Save a Product to the database.
-     *
      * @param product the product object.
      */
     @Override
     public void saveProduct(Product product) {
+        Customer tempCustomer = customerService.getCustomerById(product.getTempIdCustomer());
+        product.addCustomer(tempCustomer);
         this.productRepository.save(product);
     }
 
@@ -46,11 +48,8 @@ public class ProductServiceImplementation implements ProductService {
 
     /**
      * Retrieve a specific product from the database.
-     *
      * @param id the id of the product.
-     *
      * @throws RuntimeException in case it was not found.
-     *
      * @return the product object.
      */
     @Override
@@ -60,14 +59,13 @@ public class ProductServiceImplementation implements ProductService {
         if (optional.isPresent()) {
             product = optional.get();
         } else {
-            throw new RuntimeException(" No hay un producto especificado.");
+            throw new IdNotFoundException(" No hay un producto especificado.");
         }
         return product;
     }
 
     /**
      * Delete a Product from the database.
-     *
      * @param id the id of the product.
      */
     @Override
@@ -77,7 +75,6 @@ public class ProductServiceImplementation implements ProductService {
 
     /**
      * Display all the Products from the database.
-     *
      * @return a {@link java.util.List List<>} of products.
      */
     @Override
