@@ -1,6 +1,8 @@
 package com.ayigroup.mepv.services;
 
+import com.ayigroup.mepv.exceptions.IdNotFoundException;
 import com.ayigroup.mepv.model.Customer;
+import com.ayigroup.mepv.model.Product;
 import com.ayigroup.mepv.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,18 @@ public class CustomerServiceImplementation implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private ProductService productService;
+
+    public CustomerServiceImplementation(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     /**
      * Display all the Customers from the database.
-     *
      * @return a {@link java.util.List List<>} of customers.
      */
     @Override
@@ -26,7 +37,6 @@ public class CustomerServiceImplementation implements CustomerService {
 
     /**
      * Save a Customer to the database.
-     *
      * @param customer the customer object.
      */
     @Override
@@ -37,7 +47,6 @@ public class CustomerServiceImplementation implements CustomerService {
     /**
      * Overload method to be implemented by the RestController class.
      * Save a Customer to the database.
-     *
      * @param firstName the first name.
      * @param lastName the last name.
      * @param email the email.
@@ -50,11 +59,8 @@ public class CustomerServiceImplementation implements CustomerService {
 
     /**
      * Retrieve a specific Customer from the database.
-     *
      * @param id the id of the customer.
-     *
      * @throws RuntimeException in case it was not found.
-     *
      * @return the customer object.
      */
     @Override
@@ -64,18 +70,30 @@ public class CustomerServiceImplementation implements CustomerService {
         if (optional.isPresent()) {
             customer = optional.get();
         } else {
-            throw new RuntimeException(" No hay data para id: " + id);
+            throw new IdNotFoundException(" No hay data para id: " + id);
         }
         return customer;
     }
 
     /**
      * Delete a Customer from the database.
-     *
      * @param id the id of the customer.
      */
     @Override
     public void deleteCustomerById(long id) {
         this.customerRepository.deleteById(id);
+    }
+
+    /**
+     * Assigns a set of products to a specific customer.
+     * @return a Product object to be pass to the model new-product.
+     */
+    @Override
+    public Product assignProducts(long id) {
+        Product product = new Product();
+        product.setTempIdCustomer(id);
+        Customer tempCustomer = customerService.getCustomerById(id);
+        tempCustomer.addProducts(product);
+        return product;
     }
 }

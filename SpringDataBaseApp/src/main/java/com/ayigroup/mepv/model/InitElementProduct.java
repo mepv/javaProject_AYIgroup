@@ -22,4 +22,8 @@ public class InitElementProduct implements Serializable {
 
     @JsonProperty("price")
     private BigDecimal price;
+
+    @JsonProperty("customerId")
+    private Long tempIdCustomer;
+
 }

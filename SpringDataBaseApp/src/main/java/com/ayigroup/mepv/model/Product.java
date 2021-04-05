@@ -22,7 +22,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCT_SEQ")
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "product_name")
     private String productName;
@@ -33,6 +33,9 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "customer_id")
+    private Long tempIdCustomer;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "customer_product",
@@ -40,10 +43,11 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "customer_id"))
     private Set<Customer> customers;
 
-    public Product(String productName, String condition, BigDecimal price) {
+    public Product(String productName, String condition, BigDecimal price, long tempIdCustomer) {
         this.productName = productName;
         this.condition = condition;
         this.price = price;
+        this.tempIdCustomer = tempIdCustomer;
     }
 
     public void addCustomer(Customer customer) {

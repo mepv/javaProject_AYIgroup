@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Acerca del Proyecto | mepv</title>
+    <meta name="description" content="This is the description">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0F44C7;">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <a class="nav-link active" style="color: #fff;" th:href="@{/}">Home</a>
+            <a class="nav-item nav-link active" style="color: #fff;" th:href="@{/about}">Acerca del Proyecto</a>
+        </div>
+    </nav>
+    <h1 class="project-name project-name-large">Proyecto Final - AYI group</h1>
+</header>
+<br>
+<section class="content-section container">
+    <h2 class="section-header">Acerca del proyecto</h2>
+    <ul>
+        <li>
+            Aplicación para ver una lista de clientes con una lista de productos.
+        </li>
+        <li>
+            La aplicación puede hacer las operaciones CRUD - Create, Read, Update and Delete.
+        </li>
+        <li>
+            La aplicación esta implementando la dependencia del proyecto Lombok.
+        </li>
+        <li>
+            La aplicación esta implementando Spring Security.
+        </li>
+        <li>
+            La data está guardada en memoria usando la base de datos H2 Database.
+        </li>
+    </ul>
+    <p>Para interactuar con la aplicación puedes crear tu usuario o acceder directamente a través de la cuenta
+        <br> creada por defecto, cuyo usuario y password es admin.</p>
+    <br>
+    <p style="font-style: italic;">Esta aplicación tiene aspectos para mejorar, que considero que a medida de que vaya
+        adquiriendo nuevos conocimientos y ganando experiencia en diferentes maneras de implementar patrones de diseño
+        se puede seguir mejorando la implementación de la app. <br><br> Quiero decir que estoy bastante contento con lo
+        aprendido y el trabajo que he llevado a cabo en la realizción de este proyecto y curso.
+        Agradezco a AYI Group por la oportunidad y a Santi Romero por su tiempo y dedicación.
+    </p>
+    <hr>
+    <h3>API uso</h3>
+    <div class="images">
+        <span>API Clientes <br> localhost:8080/api/v1/customers</span>
+        <br>
+        <img th:src="@{/images/customer.png}" alt="customer">
+    </div>
+    <br>
+    <div class="images">
+        <span>API Productos <br> localhost:8080/api/v1/products</span>
+        <br>
+        <img th:src="@{/images/products.png}" alt="products">
+    </div>
+    <br>
+    <div class="images">
+        <span>API Registrar <br> localhost:8080/api/v1/registration</span>
+        <br>
+        <img th:src="@{/images/registration.png}" alt="customer">
+    </div>
+</section>
+
+<div class="footer-links">
+    <div class="footer-container">
+        <ul>
+            <li>
+                <i class="fas fa-home" style="color: #fff;"></i><a th:href="@{/}" style="color: #fff;"> Home</a>
+            </li>
+            <li>
+                <i class="fab fa-github" style="color: #fff;"></i><a th:href="@{https://github.com/mepv}" style="color: #fff;"> GitHub Perfil</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<footer class="footer">
+    <h3> Mario Palacios <br> Proyecto final - AYI Group</h3>
+</footer>
+</body>
+
+</html>

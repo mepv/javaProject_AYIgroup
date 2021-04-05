@@ -21,18 +21,20 @@ public class MyRestController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping("/newProducts")
+    @PostMapping("api/v1/products")
     public String newProducts(@RequestParam(name = "product", defaultValue = "producto sin nombre") String productName,
                               @RequestParam(name = "condition", defaultValue = "sin definir") String condition,
                               @RequestParam(name = "price", defaultValue = "0") BigDecimal price,
+                              @RequestParam(name = "customerId", defaultValue = "1") long id,
                               @RequestBody InitElementProduct initElementProduct) {
         productService.saveProduct(initElementProduct.getProductName(),
                 initElementProduct.getCondition(),
-                initElementProduct.getPrice());
+                initElementProduct.getPrice(),
+                initElementProduct.getTempIdCustomer());
         return "";
     }
 
-    @PostMapping("/newCustomers")
+    @PostMapping("/api/v1/customers")
     public String newCustomers(@RequestParam(name = "firstName", defaultValue = "anonimo") String firstName,
                                @RequestParam(name = "lastName", defaultValue = "anonimo") String lastName,
                                @RequestParam(name = "email", defaultValue = "example@email.com") String email,
