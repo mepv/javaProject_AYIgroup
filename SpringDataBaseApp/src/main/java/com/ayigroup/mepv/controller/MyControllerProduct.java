@@ -1,6 +1,5 @@
 package com.ayigroup.mepv.controller;
 
-import com.ayigroup.mepv.model.Customer;
 import com.ayigroup.mepv.model.Product;
 import com.ayigroup.mepv.services.CustomerService;
 import com.ayigroup.mepv.services.ProductService;
@@ -30,8 +29,6 @@ public class MyControllerProduct {
 
     @PostMapping("/saveProduct")
     public String saveProduct(@ModelAttribute("product") Product product) {
-        Customer tempCustomer = customerService.getCustomerById(product.getTempIdCustomer());
-        product.addCustomer(tempCustomer);
         productService.saveProduct(product);
         return "redirect:/";
     }
