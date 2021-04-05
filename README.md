@@ -5,10 +5,12 @@ Repositorio de Mario Palacios.
 
 - Aplicación para ver una lista de clientes con una lista de productos.
 
+- Se sugiere ver la pág Acerca del Proyecto antes de interactuar con la app. -> 'localhost:8080/about.html'
+
 - La aplicación puede hacer las operaciones CRUD - Create, Read, Update and Delete.
 
 - La aplicación esta implementando la dependencia del proyecto Lombok.
 
-- La data está guardada en memoria usando la base de datos H2 Database.
+- La aplicación esta implementando Spring Security. 
 
-- La misma se encuentra en desarrollo. La implementación de la relación ManyToMany junto con JoinTable no relaciona correctamente las entidades. Si bien se crea la tabla join 'customer_product' con sus respectivas FOREIGN KEY, las PRIMARY KEY de cada entidad no están siendo guardadas en la tabla. 
+- La data está guardada en memoria usando la base de datos H2 Database.
